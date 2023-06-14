@@ -39,6 +39,7 @@ class HeatMapColumn extends StatelessWidget {
 
   /// The text color value of [HeatMapContainer].
   final Color? textColor;
+  final Color? heatTextColor;
 
   /// The colorsets which give the color value for its thresholds key value.
   ///
@@ -84,6 +85,7 @@ class HeatMapColumn extends StatelessWidget {
     this.defaultColor,
     this.datasets,
     this.textColor,
+    this.heatTextColor,
     this.borderRadius,
     this.margin,
     this.colorsets,
@@ -100,6 +102,7 @@ class HeatMapColumn extends StatelessWidget {
             size: size,
             fontSize: fontSize,
             textColor: textColor,
+            heatTextColor: heatTextColor,
             borderRadius: borderRadius,
             margin: margin,
             onClick: onClick,

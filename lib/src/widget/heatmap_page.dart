@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_heatmap_calendar/src/data/heatmap_first_day.dart';
 import './heatmap_month_text.dart';
 import './heatmap_column.dart';
 import '../data/heatmap_color_mode.dart';
@@ -12,7 +13,7 @@ class HeatMapPage extends StatelessWidget {
   /// List value of every sunday's month information.
   ///
   /// From 1: January to 12: December.
-  final List<int> _firstDayInfos = [];
+  final List<HeatmapFirstDay> _firstDayInfos = [];
 
   /// The number of days between [startDate] and [endDate].
   final int _dateDifferent;
@@ -47,6 +48,9 @@ class HeatMapPage extends StatelessWidget {
 
   /// The text color value of every blocks.
   final Color? textColor;
+  final Color? monthTextColor;
+  final Color? weekTextColor;
+  final Color? heatTextColor;
 
   /// ColorMode changes the color mode of blocks.
   ///
@@ -85,6 +89,9 @@ class HeatMapPage extends StatelessWidget {
     this.datasets,
     this.defaultColor,
     this.textColor,
+    this.weekTextColor,
+    this.monthTextColor,
+    this.heatTextColor,
     this.colorsets,
     this.borderRadius,
     this.onClick,
@@ -124,6 +131,7 @@ class HeatMapPage extends StatelessWidget {
         defaultColor: defaultColor,
         colorsets: colorsets,
         textColor: textColor,
+        heatTextColor: heatTextColor,
         borderRadius: borderRadius,
         margin: margin,
         maxValue: maxValue,
@@ -133,7 +141,7 @@ class HeatMapPage extends StatelessWidget {
       ));
 
       // also add first day's month information to _firstDayInfos list.
-      _firstDayInfos.add(_firstDay.month);
+      _firstDayInfos.add(HeatmapFirstDay(_firstDay.year, _firstDay.month));
     }
 
     return columns;
@@ -142,36 +150,20 @@ class HeatMapPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Show week labels to left side of heatmap.
-            HeatMapWeekText(
-              margin: margin,
-              fontSize: fontSize,
-              size: size,
-              fontColor: textColor,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Show month labels to top of heatmap.
-                HeatMapMonthText(
-                  firstDayInfos: _firstDayInfos,
-                  margin: margin,
-                  fontSize: fontSize,
-                  fontColor: textColor,
-                  size: size,
-                ),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Show month labels to top of heatmap.
+        HeatMapMonthText(
+          firstDayInfos: _firstDayInfos,
+          margin: margin,
+          fontSize: fontSize,
+          fontColor: monthTextColor,
+          size: size,
+        ),
 
-                // Heatmap itself.
-                Row(
-                  children: <Widget>[..._heatmapColumnList()],
-                ),
-              ],
-            ),
-          ],
+        // Heatmap itself.
+        Row(
+          children: <Widget>[..._heatmapColumnList()],
         ),
       ],
     );

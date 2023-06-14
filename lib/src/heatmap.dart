@@ -3,6 +3,7 @@ import './widget/heatmap_page.dart';
 import './widget/heatmap_color_tip.dart';
 import './data/heatmap_color_mode.dart';
 import './util/date_util.dart';
+import 'widget/heatmap_week_text.dart';
 
 class HeatMap extends StatefulWidget {
   /// The Date value of start day of heatmap.
@@ -26,6 +27,11 @@ class HeatMap extends StatefulWidget {
 
   /// The text color value of every blocks.
   final Color? textColor;
+  final Color? weekTextColor;
+  final Color? monthTextColor;
+
+  /// The text color value of every blocks.
+  final Color? heatTextColor;
 
   /// The double value of every block's size.
   final double? size;
@@ -94,6 +100,9 @@ class HeatMap extends StatefulWidget {
     this.startDate,
     this.endDate,
     this.textColor,
+    this.weekTextColor,
+    this.monthTextColor,
+    this.heatTextColor,
     this.size = 20,
     this.fontSize,
     this.onClick,
@@ -131,22 +140,35 @@ class _HeatMap extends State<HeatMap> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         // Heatmap Widget.
-        _scrollableHeatMap(HeatMapPage(
-          endDate: widget.endDate ?? DateTime.now(),
-          startDate: widget.startDate ??
-              DateUtil.oneYearBefore(widget.endDate ?? DateTime.now()),
-          colorMode: widget.colorMode,
-          size: widget.size,
-          fontSize: widget.fontSize,
-          datasets: widget.datasets,
-          defaultColor: widget.defaultColor,
-          textColor: widget.textColor,
-          colorsets: widget.colorsets,
-          borderRadius: widget.borderRadius,
-          onClick: widget.onClick,
-          margin: widget.margin,
-          showText: widget.showText,
-        )),
+        Row(children: [
+          HeatMapWeekText(
+            margin: widget.margin,
+            fontSize: widget.fontSize,
+            size: widget.size,
+            fontColor: widget.weekTextColor,
+          ),
+          Expanded(
+            child: _scrollableHeatMap(HeatMapPage(
+              endDate: widget.endDate ?? DateTime.now(),
+              startDate: widget.startDate ??
+                  DateUtil.oneYearBefore(widget.endDate ?? DateTime.now()),
+              colorMode: widget.colorMode,
+              size: widget.size,
+              fontSize: widget.fontSize,
+              datasets: widget.datasets,
+              defaultColor: widget.defaultColor,
+              textColor: widget.textColor,
+              weekTextColor: widget.weekTextColor,
+              monthTextColor: widget.monthTextColor,
+              heatTextColor: widget.heatTextColor,
+              colorsets: widget.colorsets,
+              borderRadius: widget.borderRadius,
+              onClick: widget.onClick,
+              margin: widget.margin,
+              showText: widget.showText,
+            )),
+          )
+        ],),
 
         // Show HeatMapColorTip if showColorTip is true.
         if (widget.showColorTip == true)
