@@ -1,7 +1,7 @@
 class DateUtil {
   static const int DAYS_IN_WEEK = 7;
 
-  static const List<String> MONTH_LABEL = [
+  static final List<String> MONTH_LABEL = [
     '',
     'January',
     'February',
@@ -17,7 +17,7 @@ class DateUtil {
     'December',
   ];
 
-  static const List<String> SHORT_MONTH_LABEL = [
+  static final List<String> SHORT_MONTH_LABEL = [
     '',
     'Jan',
     'Feb',
@@ -33,7 +33,7 @@ class DateUtil {
     'Dec',
   ];
 
-  static const List<String> WEEK_LABEL = [
+  static final List<String> WEEK_LABEL = [
     '',
     'Sun',
     'Mon',
