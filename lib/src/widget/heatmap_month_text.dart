@@ -88,6 +88,7 @@ class HeatMapMonthText extends StatelessWidget {
   Widget _renderText(String text) {
     return Text(
       text,
+      textScaleFactor: 1.0,
       style: TextStyle(
         color: fontColor,
         fontSize: fontSize,

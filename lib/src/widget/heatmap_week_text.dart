@@ -37,6 +37,7 @@ class HeatMapWeekText extends StatelessWidget {
                 fontSize: fontSize ?? 12,
                 color: fontColor,
               ),
+              textScaleFactor: 1.0,
             ),
           ),
       ],

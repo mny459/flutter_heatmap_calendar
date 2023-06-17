@@ -96,6 +96,7 @@ class HeatMapColorTip extends StatelessWidget {
   Widget _defaultText(String text) {
     return Text(
       text,
+      textScaleFactor: 1.0,
       style: TextStyle(fontWeight: FontWeight.bold, fontSize: size ?? 10),
     );
   }
