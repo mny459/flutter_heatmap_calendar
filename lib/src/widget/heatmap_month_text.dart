@@ -50,8 +50,13 @@ class HeatMapMonthText extends StatelessWidget {
         var width = cellWidth * 2;
 
         if (currentMonth.month == 1) {
+          var i = 1;
+          while (firstDayInfos!.length > label + i &&
+              firstDayInfos![label + i] == currentMonth) {
+            i++;
+          }
           monthText = '$monthText ${currentMonth.year}';
-          width = cellWidth * 5 + 4 * marginLeft;
+          width = cellWidth * i + (i - 1) * marginLeft;
         }
 
         // Add Text without width margin if first week is end of the month.
